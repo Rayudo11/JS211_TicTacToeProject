@@ -32,25 +32,69 @@ const printBoard = () => {
   console.log('2 ' + board[2].join(' | '));
 }
 
+
+
+
 const horizontalWin = () => {
+  for(let i = 0; i < board.length; i++){
+    if((board[0][0] === 'X' && board[0][1] === 'X' && board[0][2] === 'X') || 
+      (board[0][0] === 'O' && board[0][1] =='O' && board[0][2] === 'O') || 
+      (board[1][0] === 'X' && board[1][1] =='X' && board[1][2] === 'X') || 
+      (board[1][0] === 'O' && board[1][1] =='O' && board[1][2] === 'O') || 
+      (board[2][0] === 'X' && board[2][1] =='X' && board[2][2] === 'X') || 
+      (board[2][0] === 'O' && board[2][1] =='O' && board[2][2] === 'O')) {
+     return true
+    }
+  }
   // Your code here to check for horizontal wins
+  // The best way to check for a win horizontally is if we can prove that the entire row is either x or o.
+ 
 }
 
 const verticalWin = () => {
   // Your code here to check for vertical wins
+  for(let i = 0; i < board.length; i++){
+    if((board[0][0] === 'X' && board[1][0] === 'X' && board[2][0] === 'X') || 
+      (board[0][0] === 'O' && board[1][0] ==='O' && board[2][0] === 'O') || 
+      (board[0][1] === 'X' && board[1][1] ==='X' && board[2][1] === 'X') || 
+      (board[0][1] === 'O' && board[1][1] ==='O' && board[2][1] === 'O') || 
+      (board[0][2] === 'X' && board[1][2] ==='X' && board[2][2] === 'X') || 
+      (board[0][2] === 'O' && board[1][2] ==='O' && board[2][2] === 'O')) {
+     return true
+    }
+  }
 }
 
 const diagonalWin = () => {
   // Your code here to check for diagonal wins
+  for(let i = 0; i < board.length; i++){
+    if((board[0][0] === 'X' && board[1][1] === 'X' && board[2][2] === 'X') ||  
+       (board[0][0] === 'O' && board[1][1] === 'O' && board[2][2] === 'O') || 
+       (board[0][2] === 'X' && board[1][1] ==='X' && board[2][0] === 'X') || 
+       (board[0][2] === 'O' && board[1][1] ==='O' && board[2][0] === 'O')) {
+     return true
+    }
+  }
 }
 
-const checkForWin = () => {
+const checkForWin = (row, column) => {
   // Your code here call each of the check for types of wins
+  if((diagonalWin() == true ) || (horizontalWin() == true ) || (verticalWin() == true )) {
+    return true;
+  }
 }
 
 const ticTacToe = (row, column) => {
-  // Your code here to place a marker on the board
-  // then check for a win
+   board[row][column] = playerTurn
+  
+  if(playerTurn === 'X'){
+   return playerTurn ='O'
+  }
+   
+
+  //if (document.getElementById(id).clicked === true){
+   //console.log('you clicked me')
+ //}
 }
 
 const getPrompt = () => {
@@ -80,7 +124,11 @@ if (typeof describe === 'function') {
       assert.deepEqual(board, [ ['O', ' ', ' '], [' ', 'X', ' '], [' ', ' ', ' '] ]);
     });
     it('should check for vertical wins', () => {
-      board = [ [' ', 'X', ' '], [' ', 'X', ' '], [' ', 'X', ' '] ];
+      board = [ 
+      [' ', 'X', ' '], 
+      [' ', 'X', ' '], 
+      [' ', 'X', ' '] 
+    ];
       assert.equal(verticalWin(), true);
     });
     it('should check for horizontal wins', () => {
