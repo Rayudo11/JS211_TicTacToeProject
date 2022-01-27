@@ -28,6 +28,7 @@ const handleClick = (element) => {
 
 const addMarker = (id) => {
   console.log(`We'll place a mark on square: ${id}`)
+  document.getElementById(id).innerHTML = currentMarker
   // @TODO, Mix & Match. 
   // You will need the following pieces:
   
@@ -45,6 +46,8 @@ const updateBoard = (id) => {
   // parses the id string into a number then captures the first and last part of the newly created number as row & column
   const row = parseInt(id.charAt(0))
   const column = parseInt(id.charAt(2)) 
+
+board[row][column] = currentMarker
 
   console.log(`you clicked the sq at ${row} and ${column}`)
   console.log(board)
@@ -66,14 +69,42 @@ const checkForWin = () => {
 
 const horizontalWin = () => {
   // @TODO, Your code here: to check for horizontal wins
+  for(let i = 0; i < board.length; i++){
+    if((board[0][0] === 'X' && board[0][1] === 'X' && board[0][2] === 'X') || 
+      (board[0][0] === 'O' && board[0][1] =='O' && board[0][2] === 'O') || 
+      (board[1][0] === 'X' && board[1][1] =='X' && board[1][2] === 'X') || 
+      (board[1][0] === 'O' && board[1][1] =='O' && board[1][2] === 'O') || 
+      (board[2][0] === 'X' && board[2][1] =='X' && board[2][2] === 'X') || 
+      (board[2][0] === 'O' && board[2][1] =='O' && board[2][2] === 'O')) {
+     return true
+    }
+  }
 }
 
 const verticalWin = () => {
   // @TODO, Your code here: to check for vertical wins
+  for(let i = 0; i < board.length; i++){
+    if((board[0][0] === 'X' && board[1][0] === 'X' && board[2][0] === 'X') || 
+      (board[0][0] === 'O' && board[1][0] ==='O' && board[2][0] === 'O') || 
+      (board[0][1] === 'X' && board[1][1] ==='X' && board[2][1] === 'X') || 
+      (board[0][1] === 'O' && board[1][1] ==='O' && board[2][1] === 'O') || 
+      (board[0][2] === 'X' && board[1][2] ==='X' && board[2][2] === 'X') || 
+      (board[0][2] === 'O' && board[1][2] ==='O' && board[2][2] === 'O')) {
+     return true
+    }
+  }
 }
 
 const diagonalWin = () => {
   // @TODO, Your code here: to check for diagonal wins
+  for(let i = 0; i < board.length; i++){
+    if((board[0][0] === 'X' && board[1][1] === 'X' && board[2][2] === 'X') ||  
+       (board[0][0] === 'O' && board[1][1] === 'O' && board[2][2] === 'O') || 
+       (board[0][2] === 'X' && board[1][1] ==='X' && board[2][0] === 'X') || 
+       (board[0][2] === 'O' && board[1][1] ==='O' && board[2][0] === 'O')) {
+     return true
+    }
+  }
 }
 
 const changeMarker = () => {
